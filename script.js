@@ -72,9 +72,11 @@ calculateBtn.addEventListener("click", () => {
     validationMessage.textContent = "";
     orderSummary.innerHTML = "";
 
+    const customerNameValue = customerName.value.trim();
+    const productCountValue = Number(productCount.value);
 
 
-    if (!customerName || productCount <= 0) {
+    if (!customerNameValue || productCountValue <= 0) {
         validationMessage.textContent = "Please enter a valid name and product count.";
         return;
     }
@@ -83,10 +85,11 @@ calculateBtn.addEventListener("click", () => {
     let productDetails = "";
 
 
-    for (let i = 0; i < productCount; i++) {
-        const name = document.getElementById(`productName-${i}`).value;
-        const price = document.getElementById(`productPrice-${i}`).value;
-        const quantity = document.getElementById(`productQuantity-${i}`).value;
+    for (let i = 0; i < productCountValue; i++) {
+        const name = document.getElementById(`productName-${i}`).value.trim();
+        const price = Number(document.getElementById(`productPrice-${i}`).value);
+        const quantity = Number(document.getElementById(`productQuantity-${i}`).value);
+
 
         if (price <= 0 || quantity <= 0) {
             validationMessage.textContent = "Price and quantity are INVALID";
@@ -114,7 +117,7 @@ calculateBtn.addEventListener("click", () => {
 
     orderSummary.innerHTML = `
             <h2>MINI STORE CHECKOUT SYSTEM</h2>
-            <p>Customer: ${customerName}</p>
+            <p>Customer: ${customerNameValue}</p>
             ${productDetails}
             <h3>ORDER SUMMARY</h3>
             <p>Subtotal: ₱${subtotal.toFixed(2)}</p>
