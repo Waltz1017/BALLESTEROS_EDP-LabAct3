@@ -44,7 +44,7 @@ insertProducts.addEventListener("click", function () {
     const count = Number(productCount.value);
     const customerNameValue = customerName.value.trim();
  
-    if (customerNameValue === "" || count <= 0) {
+    if (customerNameValue === "" || isNaN(count) || count <= 0) {
         validationMessage.textContent = "Please enter the customer's name and a valid product count.";
         return;
     }
@@ -59,8 +59,8 @@ insertProducts.addEventListener("click", function () {
             
             <br><br>
             
-            <label for="productPrice-${i}">Product Price:</label>
-            <input type="number" id="productPrice-${i}" min="1" step="0.01" required>
+            <label for="productPrice-${i}">Price:</label>
+            <input type="number" id="productPrice-${i}" min="0.01" step="0.01" required>
             
             <br><br>
             
@@ -79,8 +79,8 @@ calculateBtn.addEventListener("click", function () {
     const customerNameValue = customerName.value.trim();
     const count = Number(productCount.value);
  
-    if (customerNameValue === "" || count <= 0) {
-        validationMessage.textContent = "Please enter your name and number of products.";
+    if (customerNameValue === "" || isNaN(count) || count <= 0) {
+        validationMessage.textContent = "Please enter your name and a valid number of products.";
         return;
     }
  
@@ -92,8 +92,8 @@ calculateBtn.addEventListener("click", function () {
         const price = Number(document.getElementById(`productPrice-${i}`).value);
         const quantity = Number(document.getElementById(`productQuantity-${i}`).value);
  
-        if (!name || price <= 0 || quantity <= 0) {
-            validationMessage.textContent = "Please fill in all product details correctly.";
+        if (!name || isNaN(price) || price <= 0 || isNaN(quantity) || quantity <= 0) {
+            validationMessage.textContent = `Please fill in valid details for Product ${i + 1} (name, price, and quantity).`;
             return;
         }
  
