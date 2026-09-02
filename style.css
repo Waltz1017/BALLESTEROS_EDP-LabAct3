@@ -1,0 +1,36 @@
+body{
+    background-color:#AEE2FF;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
+#customerForm{
+    background-color: #B5BAFF;
+    text-align: center;
+    font-size: 20px;
+    border: 2px solid black;
+    padding: 20px;
+    width: 50%;
+}
+#submitBtn{
+    font-size:20px;
+    border-radius: 5px;
+    background-color:darkseagreen
+}
+#calculateBtn{
+    font-size:20px;
+    border-radius: 5px;
+    background-color:#D9F9DF;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#orderSummary{
+    background-color: #B5BAFF;
+    text-align: center;
+    font-size: 20px;
+    border: 2px solid black;
+    padding: 20px;
+    width: 50%;
+}
