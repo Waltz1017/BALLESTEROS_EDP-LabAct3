@@ -52,9 +52,8 @@ insertProducts.addEventListener("click", function () {
     productsContainer.innerHTML = "";
 
     const count = Number(document.getElementById("productCount").value);
-    const customersName = document.getElementById('customerName').value.trim();
 
-    if (customersName === "" || count <= 0) {
+    if (customerName.value.trim() === "" || count <= 0) {
         validationMessage.textContent = "Please enter the customer's name and a valid product count.";
         return;
     } else {
