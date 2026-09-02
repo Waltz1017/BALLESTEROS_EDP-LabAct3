@@ -1,36 +1,40 @@
 const productCount = document.getElementById('productCount');
 const customerName = document.getElementById('customerName');
-const insertProducts = document.getElementById('insertProducts');
+const productContainer = document.getElementById('productContainer');
 const validationMessage = document.getElementById('validationMessage');
 const productsContainer = document.getElementById('productsContainer');
 const deliveryOption = document.getElementById('deliveryOption');
 const calculateBtn = document.getElementById('calculateBtn');
 const orderSummary = document.getElementById('orderSummary');
 
-productCountInput.addEventListener("change", () => {
+productCount.addEventListener("change", () => {
   productContainer.innerHTML = "";
-  const count = Number(productCountInput.value);
+  const count = Number(productCount.value);
 
   for (let i = 0; i < count; i++) {
     const productHTML = `
-      <h4>Product ${i+1}</h4>
-      <label>Product Name:</label>
-      <input type="text" id="productName-${i}"><br>
-      <label>Price:</label>
-      <input type="number" id="productPrice-${i}"><br>
-      <label>Quantity:</label>
-      <input type="number" id="productQuantity-${i}"><br><br>
+      <h3>Product ${i + 1}</h3>
+            
+             <label for="productName-${i}">Product Name:</label>
+             <input type="text" id="productName-${i}" required>
+            
+             <br><br>
+            
+             <label for="productPrice-${i}">Product Price:</label>
+             <input type="number" id="productPrice-${i}" min="1" step="0.01" required>
+            
+             <br><br>
+            
+             <label for="productQuantity-${i}">Quantity:</label>
+             <input type="number" id="productQuantity-${i}" min="1" required>
     `;
     productContainer.insertAdjacentHTML("beforeend", productHTML);
   }
 });
 
-function calculateItemAmount(price, quantity) {
-    const amount = price * quantity;
-    return amount;
-}
 
 function calculateDiscount(subtotal) {
+    ;
 
     if (subtotal >= 5000) {
         return subtotal * 0.10;
@@ -57,14 +61,18 @@ function getDeliveryFee(option) {
     }
 }
 
+function calculateItemAmount(price, quantity) {
+    const amount = price * quantity;
+    return amount;
+
+}
 
 
-calculateBtn.addEventListener("click", function () {
+calculateBtn.addEventListener("click", () => {
     validationMessage.textContent = "";
     orderSummary.innerHTML = "";
 
-    const customerName = document.getElementById("customerName").value.trim();
-    const productCount = Number(productCount.value);
+
 
     if (!customerName || productCount <= 0) {
         validationMessage.textContent = "Please enter a valid name and product count.";
@@ -74,15 +82,14 @@ calculateBtn.addEventListener("click", function () {
     let subtotal = 0;
     let productDetails = "";
 
-    const count = Number(document.getElementById("productCount").value);
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < productCount; i++) {
         const name = document.getElementById(`productName-${i}`).value;
         const price = document.getElementById(`productPrice-${i}`).value;
         const quantity = document.getElementById(`productQuantity-${i}`).value;
 
         if (price <= 0 || quantity <= 0) {
-            validationMessage.textContent = "Price and quantity are invalid.";
+            validationMessage.textContent = "Price and quantity are INVALID";
             return;
         }
 
@@ -114,8 +121,8 @@ calculateBtn.addEventListener("click", function () {
             <p>Discount Rate: ${(discount > 0 ? ((discount / subtotal) * 100).toFixed(0) + "%" : "No discount")}</p>
             <p>Discount Amount: ₱${discount.toFixed(2)}</p>
             <p>Delivery Type: ${deliveryOption === "1" ? "Store Pickup" :
-                                deliveryOption === "2" ? "Standard Delivery" :
-                                "Express Delivery"}</p>
+            deliveryOption === "2" ? "Standard Delivery" :
+                "Express Delivery"}</p>
             <p>Delivery Fee: ₱${deliveryFee.toFixed(2)}</p>
             <p><strong>Final Amount: ₱${finalAmount.toFixed(2)}</strong></p>
         `;
